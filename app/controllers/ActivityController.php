@@ -12,6 +12,39 @@ class ActivityController extends ControllerBase
     public function indexAction()
     {
         $this->persistent->parameters = null;
+        $numberPage = 1;
+        if ($this->request->isPost()) {
+            $query = Criteria::fromInput($this->di, 'Activity', $_POST);
+            $this->persistent->parameters = $query->getParams();
+        } else {
+            $numberPage = $this->request->getQuery("page", "int");
+        }
+
+        $parameters = $this->persistent->parameters;
+        if (!is_array($parameters)) {
+            $parameters = [];
+        }
+        $parameters["order"] = "activityid";
+
+        $activity = Activity::find($parameters);
+        if (count($activity) == 0) {
+            $this->flash->notice("The search did not find any activity");
+
+            $this->dispatcher->forward([
+                "controller" => "activity",
+                "action" => "index"
+            ]);
+
+            return;
+        }
+
+        $paginator = new Paginator([
+            'data' => $activity,
+            'limit'=> 10,
+            'page' => $numberPage
+        ]);
+
+        $this->view->page = $paginator->getPaginate();
     }
 
     /**
