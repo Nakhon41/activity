@@ -30,22 +30,23 @@
             <th>Activitydescription</th>
             <th>Activitydate</th>
             <th>Activityplace</th>
+            <th>Urlpicture</th>
 
-                <th></th>
-                <th></th>
+                
             </tr>
         </thead>
         <tbody>
         <?php foreach ($page->items as $activity): ?>
             <tr>
-            <td><?php echo $activity->activityid ?></td>
+                <td><?php echo $activity->activityid ?></td>
             <td><?php echo $activity->activityname ?></td>
             <td><?php echo $activity->activitydescription ?></td>
             <td><?php echo $activity->activitydate ?></td>
             <td><?php echo $activity->activityplace ?></td>
+            
+            <td><img src="<?php echo $activity->urlpicture?>"width="250" height="250"></td>
 
-                <td><?php echo $this->tag->linkTo(["activity/edit/" . $activity->activityid, "Edit"]); ?></td>
-                <td><?php echo $this->tag->linkTo(["activity/delete/" . $activity->activityid, "Delete"]); ?></td>
+                
             </tr>
         <?php endforeach; ?>
         </tbody>

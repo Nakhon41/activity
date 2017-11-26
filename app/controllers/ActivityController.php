@@ -90,6 +90,7 @@ class ActivityController extends ControllerBase
             $this->tag->setDefault("activitydescription", $activity->activitydescription);
             $this->tag->setDefault("activitydate", $activity->activitydate);
             $this->tag->setDefault("activityplace", $activity->activityplace);
+            $this->tag->setDefault("urlpicture", $activity->urlpicture);
             
         }
     }
@@ -113,6 +114,7 @@ class ActivityController extends ControllerBase
         $activity->activitydescription = $this->request->getPost("activitydescription");
         $activity->activitydate = $this->request->getPost("activitydate");
         $activity->activityplace = $this->request->getPost("activityplace");
+        $activity->urlpicture = $this->request->getPost("urlpicture");
         
 
         if (!$activity->save()) {
@@ -170,6 +172,7 @@ class ActivityController extends ControllerBase
         $activity->activitydescription = $this->request->getPost("activitydescription");
         $activity->activitydate = $this->request->getPost("activitydate");
         $activity->activityplace = $this->request->getPost("activityplace");
+        $activity->urlpicture = $this->request->getPost("urlpicture");
         
 
         if (!$activity->save()) {
